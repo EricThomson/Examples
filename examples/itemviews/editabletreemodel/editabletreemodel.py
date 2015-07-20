@@ -295,7 +295,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
 
         self.exitAction.triggered.connect(QtGui.qApp.quit)
 
-        self.view.selectionModel().selectionChanged.connect(self.updateActions)
+        #Following doesn't work
+        #self.view.selectionModel().selectionChanged.connect(self.updateActions)
+        
+        #Following does work: add intermediate variable
+        sModel = self.view.selectionModel()
+        sModel.selectionChanged.connect(self.updateActions)
 
         self.actionsMenu.aboutToShow.connect(self.updateActions)
         self.insertRowAction.triggered.connect(self.insertRow)
